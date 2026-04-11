@@ -922,6 +922,83 @@
       30% { transform: translateY(-5px); opacity: 1; }
     }
 
+    /* ===== PUBLICATIONS ===== */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid var(--red);
+      padding: 1.8rem;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .article-card:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-tag {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+    }
+
+    .article-date {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .article-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .article-excerpt {
+      font-size: 0.87rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .article-read-more {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+
+    .article-card:hover .article-read-more { gap: 0.7rem; }
+
     /* ===== SCROLL FX ===== */
     .fade-up {
       opacity: 0;
@@ -983,6 +1060,7 @@
     <ul class="nav-links">
       <li><a href="#practice-areas" data-i18n="nav.practice">Aree di Pratica</a></li>
       <li><a href="#about" data-i18n="nav.about">Chi Siamo</a></li>
+      <li><a href="#publications" data-i18n="nav.publications">Articoli</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Contatti</a></li>
     </ul>
     <div class="lang-toggle">
@@ -1095,6 +1173,23 @@
       </div>
       <a href="#contact" class="btn-primary" data-i18n="about.cta">Parla con noi</a>
     </div>
+  </div>
+</section>
+
+<!-- ==================== PUBLICATIONS ==================== -->
+<section id="publications" style="background:var(--black); color:var(--white);">
+  <div class="section-header fade-up">
+    <p class="section-eyebrow" data-i18n="pub.eyebrow" style="color:var(--red);">Pubblicazioni</p>
+    <h2 class="section-title" data-i18n="pub.title" style="color:var(--white);">Articoli & Approfondimenti</h2>
+    <p class="section-subtitle" data-i18n="pub.subtitle" style="color:rgba(255,255,255,0.55);">
+      Riflessioni all'intersezione tra diritto, scienza e tecnologia. Aggiornato settimanalmente.
+    </p>
+  </div>
+  <div id="articlesGrid" class="articles-grid"></div>
+  <div style="text-align:center; margin-top:3rem;">
+    <a id="linkedinBtn" href="https://www.linkedin.com/in/francescolizzani" target="_blank" rel="noopener" class="btn-secondary" data-i18n="pub.all">
+      Leggi tutti gli articoli su LinkedIn
+    </a>
   </div>
 </section>
 
@@ -1275,6 +1370,12 @@ const T = {
     'form.submit': 'Invia richiesta',
     'form.success': '✓ Messaggio inviato!',
     'nav.home': 'Home',
+    'nav.publications': 'Articoli',
+    'pub.eyebrow': 'Pubblicazioni',
+    'pub.title': 'Articoli & Approfondimenti',
+    'pub.subtitle': 'Riflessioni all\'intersezione tra diritto, scienza e tecnologia. Aggiornato settimanalmente.',
+    'pub.all': 'Leggi tutti gli articoli su LinkedIn →',
+    'pub.read_more': 'Leggi su LinkedIn',
     'chat.name': 'Studio Lizzani',
     'chat.status': 'Online',
     'chat.placeholder': 'Scrivi un messaggio...',
@@ -1335,6 +1436,12 @@ const T = {
     'form.submit': 'Send request',
     'form.success': '✓ Message sent!',
     'nav.home': 'Home',
+    'nav.publications': 'Articles',
+    'pub.eyebrow': 'Publications',
+    'pub.title': 'Articles & Insights',
+    'pub.subtitle': 'Reflections at the intersection of law, science, and technology. Updated weekly.',
+    'pub.all': 'Read all articles on LinkedIn →',
+    'pub.read_more': 'Read on LinkedIn',
     'chat.name': 'Studio Lizzani',
     'chat.status': 'Online',
     'chat.placeholder': 'Type a message...',
@@ -1426,6 +1533,8 @@ function setLang(l) {
 
   document.getElementById('footerCopy').textContent =
     '© ' + new Date().getFullYear() + ' Studio Legale Lizzani · Verona';
+
+  renderArticles();
 
   if (chatReady) {
     document.getElementById('chatInput').placeholder = T[l]['chat.placeholder'];
@@ -1568,8 +1677,64 @@ function scrollChat() {
   m.scrollTop = m.scrollHeight;
 }
 
+// ── ARTICLES DATA ─────────────────────────────────────
+// Per aggiungere un nuovo articolo: copia un blocco { ... } e incollalo
+// in cima all'array, cambia titolo, tag, data, excerpt e url.
+const ARTICLES = [
+  {
+    tag_it: 'Intelligenza Artificiale',
+    tag_en: 'Artificial Intelligence',
+    date: '7 Aprile 2026',
+    date_en: 'April 7, 2026',
+    title_it: 'EU AI Act: Cosa Devono Sapere le Startup nel 2026',
+    title_en: 'EU AI Act: What Startups Need to Know in 2026',
+    excerpt_it: 'Il regolamento europeo sull\'intelligenza artificiale è pienamente applicabile. Ecco le principali obbligazioni per chi sviluppa sistemi AI ad alto rischio e come strutturarsi per la compliance.',
+    excerpt_en: 'The EU AI Act is now fully applicable. Here are the key obligations for high-risk AI system developers and how to structure compliance.',
+    url: 'https://www.linkedin.com/in/francescolizzani'
+  },
+  {
+    tag_it: 'Diritto dello Spazio',
+    tag_en: 'Space Law',
+    date: '31 Marzo 2026',
+    date_en: 'March 31, 2026',
+    title_it: 'Space Debris e Responsabilità: Il Vuoto Normativo che Preoccupa gli Operatori',
+    title_en: 'Space Debris and Liability: The Regulatory Gap That Worries Operators',
+    excerpt_it: 'Con oltre 27.000 oggetti tracciati in orbita, la questione della responsabilità per i detriti spaziali diventa sempre più urgente. Analizziamo il quadro normativo internazionale.',
+    excerpt_en: 'With over 27,000 tracked objects in orbit, liability for space debris is increasingly urgent. We analyze the international regulatory framework.',
+    url: 'https://www.linkedin.com/in/francescolizzani'
+  },
+  {
+    tag_it: 'Quantum Computing',
+    tag_en: 'Quantum Computing',
+    date: '24 Marzo 2026',
+    date_en: 'March 24, 2026',
+    title_it: 'Post-Quantum Cryptography: Perché il Diritto Deve Prepararsi Adesso',
+    title_en: 'Post-Quantum Cryptography: Why Law Must Prepare Now',
+    excerpt_it: 'I computer quantistici minacciano gli attuali sistemi crittografici. Le implicazioni legali per contratti digitali, firme elettroniche e protezione dei dati sono enormi.',
+    excerpt_en: 'Quantum computers threaten current cryptographic systems. The legal implications for digital contracts, electronic signatures, and data protection are enormous.',
+    url: 'https://www.linkedin.com/in/francescolizzani'
+  }
+];
+
+function renderArticles() {
+  const grid = document.getElementById('articlesGrid');
+  if (!grid) return;
+  grid.innerHTML = ARTICLES.map(a => `
+    <a class="article-card fade-up" href="${a.url}" target="_blank" rel="noopener">
+      <div class="article-meta">
+        <span class="article-tag">${lang === 'it' ? a.tag_it : a.tag_en}</span>
+        <span class="article-date">${lang === 'it' ? a.date : a.date_en}</span>
+      </div>
+      <p class="article-title">${lang === 'it' ? a.title_it : a.title_en}</p>
+      <p class="article-excerpt">${lang === 'it' ? a.excerpt_it : a.excerpt_en}</p>
+      <span class="article-read-more">${T[lang]['pub.read_more']} <i class="fas fa-arrow-right"></i></span>
+    </a>
+  `).join('');
+  grid.querySelectorAll('.fade-up').forEach(el => scrollObs.observe(el));
+}
+
 // ── INIT ──────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => setLang('it'));
+document.addEventListener('DOMContentLoaded', () => { setLang('it'); renderArticles(); });
 </script>
 </body>
 </html>
