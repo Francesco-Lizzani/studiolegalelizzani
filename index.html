@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Studio Legale Lizzani — Diritto e Innovazione Tecnologica. AI, Spazio, Energia, Ricerca Scientifica. Verona.">
+  <title>Studio Legale Lizzani | Diritto & Innovazione</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --red: #C8102E;
+      --red-dark: #9B0D23;
+      --red-hover: #E01030;
+      --black: #111111;
+      --dark: #1a1a1a;
+      --white: #FFFFFF;
+      --gray-light: #F4F4F4;
+      --gray: #DCDCDC;
+      --text-dark: #1a1a1a;
+      --text-gray: #5a5a5a;
+      --nav-height: 72px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      z-index: 1000;
+      border-bottom: 4px solid var(--red);
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+
+    .nav-logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+
+    .nav-logo .logo-top { display: block; font-size: 0.65rem; font-weight: 400; letter-spacing: 0.25em; color: var(--red); margin-bottom: 2px; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      border: none;
+      padding: 0.35rem 0.85rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.06em;
+    }
+
+    .lang-btn.active { background: var(--red); color: var(--white); }
+    .lang-btn:not(.active):hover { color: var(--white); background: rgba(255,255,255,0.08); }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      margin-top: var(--nav-height);
+      min-height: calc(100vh - var(--nav-height));
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-shape {
+      position: absolute;
+      top: 0; left: 0;
+      width: 48%;
+      height: 100%;
+      background: var(--red);
+      clip-path: polygon(0 0, 90% 0, 75% 100%, 0 100%);
+      opacity: 0.95;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 6%;
+      max-width: 1300px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 2px;
+      background: var(--red);
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    .hero h1 .line2 {
+      display: block;
+      color: var(--white);
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 4px;
+      background: var(--white);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--red);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2.4rem;
+      border: 2px solid var(--white);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2.4rem;
+      border: 2px solid rgba(255,255,255,0.4);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover { border-color: var(--white); }
+
+    /* ===== TRUST BAR ===== */
+    .trust-bar {
+      background: var(--red);
+      padding: 1.1rem 6%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .trust-item i { font-size: 1rem; opacity: 0.9; }
+
+    .trust-sep {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 6rem 6%; }
+
+    .section-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--red);
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      color: var(--black);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-gray);
+      line-height: 1.75;
+      max-width: 620px;
+      font-weight: 400;
+    }
+
+    .section-header { margin-bottom: 4rem; }
+
+    /* ===== PRACTICE AREAS ===== */
+    #practice-areas { background: var(--gray-light); }
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .practice-card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      border-bottom: 4px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .practice-card::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0;
+      height: 4px;
+      background: var(--red);
+      transition: width 0.3s ease;
+    }
+
+    .practice-card:hover::after { width: 100%; }
+
+    .practice-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+      transform: translateY(-5px);
+    }
+
+    .practice-icon {
+      width: 54px;
+      height: 54px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: background 0.3s;
+    }
+
+    .practice-card:hover .practice-icon { background: var(--black); }
+    .practice-icon i { font-size: 1.4rem; color: var(--white); }
+
+    .practice-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.9rem;
+      color: var(--black);
+    }
+
+    .practice-card p {
+      font-size: 0.88rem;
+      color: var(--text-gray);
+      line-height: 1.75;
+    }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-image {
+      aspect-ratio: 3/4;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 55%;
+      height: 5px;
+      background: var(--red);
+    }
+
+    .about-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(155deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .about-placeholder i {
+      font-size: 5rem;
+      color: rgba(255,255,255,0.2);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-placeholder-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .about-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--black);
+      margin-bottom: 0.3rem;
+    }
+
+    .about-role {
+      font-size: 0.88rem;
+      color: var(--red);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    .about-text {
+      font-size: 0.98rem;
+      color: var(--text-gray);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .about-text strong { color: var(--black); font-weight: 600; }
+
+    .about-disciplines {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.8rem 0 2.2rem;
+    }
+
+    .discipline-tag {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .discipline-tag:hover { background: var(--red); }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    #contact .section-eyebrow { color: var(--red); }
+    #contact .section-eyebrow::before { background: var(--red); }
+    #contact .section-title { color: var(--white); }
+    #contact .section-subtitle { color: rgba(255,255,255,0.55); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon i { font-size: 1.1rem; color: var(--white); }
+
+    .contact-detail-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-detail-value {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.93rem;
+      text-decoration: none;
+      transition: color 0.2s;
+      word-break: break-all;
+    }
+
+    .contact-detail-value:hover { color: var(--white); }
+
+    .contact-form-area { padding-left: 0; }
+
+    .contact-form-title {
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 1.8rem;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group { margin-bottom: 1.1rem; }
+
+    .form-group label {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      padding: 0.8rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      background: rgba(255,255,255,0.09);
+      border-bottom-color: var(--red);
+    }
+
+    .form-group select option { background: #222; color: var(--white); }
+    .form-group textarea { min-height: 110px; resize: vertical; }
+
+    .btn-submit {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem;
+      border: 2px solid var(--red);
+      cursor: pointer;
+      transition: all 0.25s;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      background: transparent;
+      color: var(--white);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0a0a0a;
+      padding: 1.8rem 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 4px solid var(--red);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .footer-logo .foot-top {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--red);
+      margin-bottom: 2px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    /* ===== CHATBOT ===== */
+    .chat-widget {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+    }
+
+    .chat-toggle {
+      width: 62px;
+      height: 62px;
+      background: var(--red);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(200, 16, 46, 0.45);
+      transition: all 0.3s;
+      margin-left: auto;
+      position: relative;
+    }
+
+    .chat-toggle:hover {
+      background: var(--red-dark);
+      transform: scale(1.06);
+    }
+
+    .chat-badge {
+      position: absolute;
+      top: -4px; right: -4px;
+      width: 18px; height: 18px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--red);
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .chat-badge.hidden { display: none; }
+
+    .chat-toggle i { font-size: 1.5rem; color: var(--white); }
+    .chat-toggle .chat-close { display: none; }
+    .chat-toggle .chat-open { display: block; }
+    .chat-toggle.open .chat-close { display: block; }
+    .chat-toggle.open .chat-open { display: none; }
+
+    .chat-window {
+      position: absolute;
+      bottom: 78px;
+      right: 0;
+      width: 370px;
+      height: 520px;
+      background: var(--white);
+      border-radius: 14px 14px 0 14px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px) scale(0.97);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .chat-window.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0) scale(1);
+    }
+
+    .chat-header {
+      background: var(--black);
+      padding: 1.1rem 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      border-bottom: 3px solid var(--red);
+    }
+
+    .chat-avatar {
+      width: 38px;
+      height: 38px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      color: var(--white);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .chat-hname {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .chat-hstatus {
+      font-size: 0.72rem;
+      color: #4CAF50;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 2px;
+    }
+
+    .chat-hstatus::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #4CAF50;
+      border-radius: 50%;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--gray); border-radius: 10px; }
+
+    .chat-message {
+      max-width: 88%;
+      padding: 0.75rem 1rem;
+      font-size: 0.87rem;
+      line-height: 1.55;
+      border-radius: 12px;
+      animation: fadeInMsg 0.3s ease;
+    }
+
+    @keyframes fadeInMsg {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-message.bot {
+      background: var(--gray-light);
+      color: var(--text-dark);
+      align-self: flex-start;
+      border-radius: 0 12px 12px 12px;
+    }
+
+    .chat-message.user {
+      background: var(--red);
+      color: var(--white);
+      align-self: flex-end;
+      border-radius: 12px 0 12px 12px;
+    }
+
+    .chat-quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem 0.6rem;
+    }
+
+    .quick-reply-btn {
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--red);
+      font-size: 0.76rem;
+      padding: 0.28rem 0.7rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+
+    .quick-reply-btn:hover { background: var(--red); color: var(--white); }
+
+    .chat-input-area {
+      display: flex;
+      border-top: 1px solid var(--gray);
+      padding: 0.7rem 0.8rem;
+      gap: 0.5rem;
+      background: var(--white);
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1px solid var(--gray);
+      border-radius: 4px;
+      padding: 0.6rem 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.87rem;
+      outline: none;
+      transition: border-color 0.2s;
+      color: var(--text-dark);
+    }
+
+    .chat-input:focus { border-color: var(--red); }
+
+    .chat-send {
+      background: var(--red);
+      border: none;
+      color: var(--white);
+      width: 38px; height: 38px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .chat-send:hover { background: var(--red-dark); }
+
+    .typing-indicator {
+      display: flex;
+      gap: 5px;
+      padding: 0.75rem 1rem;
+      background: var(--gray-light);
+      border-radius: 0 12px 12px 12px;
+      align-self: flex-start;
+      width: fit-content;
+    }
+
+    .typing-indicator span {
+      width: 7px; height: 7px;
+      background: #aaa;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* ===== SCROLL FX ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+    .fade-up:nth-child(5) { transition-delay: 0.4s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image { aspect-ratio: 16/9; max-height: 320px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-right { display: none; }
+      .nav-right.mobile-open {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        background: var(--black);
+        padding: 2rem 6%;
+        gap: 1.5rem;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-links { flex-direction: column; align-items: flex-start; }
+      .nav-mobile-toggle { display: block; }
+      .hero-bg-shape { width: 100%; clip-path: none; opacity: 0.25; }
+      .practice-grid { grid-template-columns: 1fr; }
+      .chat-window { width: calc(100vw - 4rem); }
+      .trust-sep { display: none; }
+      section { padding: 4rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <span class="logo-top" data-i18n="nav.firm_label">Studio Legale</span>
+    Lizzani
+  </a>
+  <div class="nav-right" id="navRight">
+    <ul class="nav-links">
+      <li><a href="#practice-areas" data-i18n="nav.practice">Aree di Pratica</a></li>
+      <li><a href="#about" data-i18n="nav.about">Chi Siamo</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contatti</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnIT" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+  <button class="nav-mobile-toggle" id="mobileToggle" onclick="toggleMobileNav()" aria-label="Menu">
+    <i class="fas fa-bars"></i>
+  </button>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="home">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-grid"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Studio Legale · Verona · Italia</p>
+    <h1>
+      <span data-i18n="hero.line1">Per te.</span><br>
+      <span class="line2" data-i18n="hero.line2">Per l'innovazione.</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub" data-i18n="hero.subtitle">
+      Il primo studio legale in Italia che fonde competenze giuridiche con solide basi scientifiche in AI, fisica quantistica e nuove tecnologie — per proteggere le frontiere del domani.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary" data-i18n="hero.cta1">Richiedi una consulenza</a>
+      <a href="#practice-areas" class="btn-secondary" data-i18n="hero.cta2">Le nostre aree</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TRUST BAR ==================== -->
+<div class="trust-bar">
+  <div class="trust-item"><i class="fas fa-balance-scale"></i> <span data-i18n="trust.bar1">Ordine Avvocati di Verona</span></div>
+  <div class="trust-sep"></div>
+  <div class="trust-item"><i class="fas fa-atom"></i> <span data-i18n="trust.bar2">Competenze Scientifiche</span></div>
+  <div class="trust-sep"></div>
+  <div class="trust-item"><i class="fas fa-rocket"></i> <span data-i18n="trust.bar3">AI · Spazio · Energia</span></div>
+  <div class="trust-sep"></div>
+  <div class="trust-item"><i class="fas fa-building"></i> <span data-i18n="trust.bar4">Startup &amp; Corporate</span></div>
+</div>
+
+<!-- ==================== PRACTICE AREAS ==================== -->
+<section id="practice-areas">
+  <div class="section-header fade-up">
+    <p class="section-eyebrow" data-i18n="practice.eyebrow">Specializzazioni</p>
+    <h2 class="section-title" data-i18n="practice.title">Le nostre aree di pratica</h2>
+    <p class="section-subtitle" data-i18n="practice.subtitle">
+      Assistiamo società e startup che operano nelle frontiere tecnologiche, con una consulenza che comprende davvero la scienza dietro ogni progetto.
+    </p>
+  </div>
+  <div class="practice-grid">
+    <div class="practice-card fade-up">
+      <div class="practice-icon"><i class="fas fa-brain"></i></div>
+      <h3 data-i18n="pa.ai.title">Intelligenza Artificiale</h3>
+      <p data-i18n="pa.ai.desc">Compliance EU AI Act, governance algoritmica, responsabilità dei sistemi AI, contratti per sviluppo e deploy di modelli ML e Deep Learning.</p>
+    </div>
+    <div class="practice-card fade-up">
+      <div class="practice-icon"><i class="fas fa-rocket"></i></div>
+      <h3 data-i18n="pa.space.title">Diritto dello Spazio</h3>
+      <p data-i18n="pa.space.desc">Contratti satellitari, space debris, frequency allocation, space tourism, normativa internazionale sulla commercializzazione dello spazio.</p>
+    </div>
+    <div class="practice-card fade-up">
+      <div class="practice-icon"><i class="fas fa-bolt"></i></div>
+      <h3 data-i18n="pa.energy.title">Energia del Futuro</h3>
+      <p data-i18n="pa.energy.desc">Energie rinnovabili, fusione nucleare, regolamentazione energetica, contratti per infrastrutture e progetti di ricerca nel settore energetico.</p>
+    </div>
+    <div class="practice-card fade-up">
+      <div class="practice-icon"><i class="fas fa-flask"></i></div>
+      <h3 data-i18n="pa.research.title">Ricerca Scientifica</h3>
+      <p data-i18n="pa.research.desc">Brevetti, proprietà intellettuale, contratti R&amp;D, trasferimento tecnologico università-impresa, protezione delle invenzioni deep tech.</p>
+    </div>
+    <div class="practice-card fade-up">
+      <div class="practice-icon"><i class="fas fa-microchip"></i></div>
+      <h3 data-i18n="pa.tech.title">Nuove Tecnologie</h3>
+      <p data-i18n="pa.tech.desc">Quantum computing, blockchain, cybersecurity, data protection GDPR, contratti tecnologici, governance dei dati per imprese innovative.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-image fade-up">
+      <div class="about-placeholder">
+        <i class="fas fa-user-tie"></i>
+        <p class="about-placeholder-label" data-i18n="about.photo_label">Avv. Francesco Lizzani</p>
+      </div>
+      <div class="about-image-bar"></div>
+    </div>
+    <div class="about-content fade-up">
+      <p class="section-eyebrow" data-i18n="about.eyebrow">Chi siamo</p>
+      <p class="about-name">Avv. Francesco Lizzani</p>
+      <p class="about-role" data-i18n="about.role">Avvocato · Diritto &amp; Innovazione Tecnologica</p>
+      <p class="about-text" data-i18n="about.text1">
+        Lo Studio Legale Lizzani si distingue per un approccio unico nel panorama legale italiano: la <strong>fusione tra competenze giuridiche e una solida formazione scientifica</strong>, coltivata nel tempo con studio e pratica.
+      </p>
+      <p class="about-text" data-i18n="about.text2">
+        Questa combinazione ci permette di assistere <strong>società e startup d'avanguardia</strong> non solo sul piano normativo, ma con una comprensione profonda della tecnologia al cuore di ogni progetto. Non traduciamo la scienza in diritto — la viviamo.
+      </p>
+      <div class="about-disciplines">
+        <span class="discipline-tag">Algebra Lineare</span>
+        <span class="discipline-tag">Quantum Computing</span>
+        <span class="discipline-tag">Fisica Classica</span>
+        <span class="discipline-tag">Meccanica Quantistica</span>
+        <span class="discipline-tag">AI / ML</span>
+        <span class="discipline-tag">Deep Learning</span>
+      </div>
+      <a href="#contact" class="btn-primary" data-i18n="about.cta">Parla con noi</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact">
+  <div class="section-header fade-up">
+    <p class="section-eyebrow" data-i18n="contact.eyebrow">Contatti</p>
+    <h2 class="section-title" data-i18n="contact.title">Siamo qui per te</h2>
+    <p class="section-subtitle" data-i18n="contact.subtitle">
+      Hai un progetto innovativo e hai bisogno di assistenza legale specializzata? Contattaci per un primo colloquio.
+    </p>
+  </div>
+  <div class="contact-grid fade-up">
+    <ul class="contact-info-list">
+      <li class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <p class="contact-detail-label" data-i18n="contact.address_label">Studio</p>
+          <p class="contact-detail-value">Via Milone n. 6, Verona</p>
+        </div>
+      </li>
+      <li class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <div>
+          <p class="contact-detail-label" data-i18n="contact.phone_label">Telefono</p>
+          <a href="tel:+393476457593" class="contact-detail-value">+39 347 645 7593</a>
+        </div>
+      </li>
+      <li class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <p class="contact-detail-label">Email</p>
+          <a href="mailto:avvfrancescolizzani@studiolegalelizzani.com" class="contact-detail-value">avvfrancescolizzani@studiolegalelizzani.com</a>
+        </div>
+      </li>
+      <li class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-certificate"></i></div>
+        <div>
+          <p class="contact-detail-label">PEC</p>
+          <a href="mailto:francescolizzani@ordineavvocativrpec.it" class="contact-detail-value">francescolizzani@ordineavvocativrpec.it</a>
+        </div>
+      </li>
+      <li class="contact-info-item">
+        <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
+        <div>
+          <p class="contact-detail-label">LinkedIn</p>
+          <a href="https://www.linkedin.com/in/francescolizzani" target="_blank" rel="noopener" class="contact-detail-value">Francesco Lizzani</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="contact-form-area">
+      <h3 class="contact-form-title" data-i18n="contact.form_title">Invia un messaggio</h3>
+      <form id="contactForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.name">Nome e Cognome</label>
+            <input type="text" data-ph-it="Mario Rossi" data-ph-en="John Smith">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="email@esempio.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.area">Area di interesse</label>
+          <select id="areaSelect">
+            <option value="" data-i18n="form.area_default">Seleziona un'area</option>
+            <option data-i18n="pa.ai.title">Intelligenza Artificiale</option>
+            <option data-i18n="pa.space.title">Diritto dello Spazio</option>
+            <option data-i18n="pa.energy.title">Energia del Futuro</option>
+            <option data-i18n="pa.research.title">Ricerca Scientifica</option>
+            <option data-i18n="pa.tech.title">Nuove Tecnologie</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.message">Messaggio</label>
+          <textarea data-ph-it="Descrivi brevemente la tua esigenza..." data-ph-en="Briefly describe your need..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn" data-i18n="form.submit">Invia richiesta</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-logo">
+    <span class="foot-top" data-i18n="nav.firm_label">Studio Legale</span>
+    Lizzani
+  </div>
+  <p class="footer-copy" id="footerCopy">© 2026 Studio Legale Lizzani · Verona</p>
+  <ul class="footer-links">
+    <li><a href="#home" data-i18n="nav.home_short">Home</a></li>
+    <li><a href="#practice-areas" data-i18n="nav.practice_short">Aree</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contatti</a></li>
+  </ul>
+</footer>
+
+<!-- ==================== CHATBOT ==================== -->
+<div class="chat-widget">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar">SL</div>
+      <div>
+        <p class="chat-hname" data-i18n="chat.name">Studio Lizzani</p>
+        <p class="chat-hstatus" data-i18n="chat.status">Online</p>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="quickReplies"></div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Scrivi un messaggio..." onkeypress="handleChatKey(event)">
+      <button class="chat-send" onclick="sendChatMessage()" aria-label="Invia">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+  <button class="chat-toggle" id="chatToggle" onclick="toggleChat()" aria-label="Chat">
+    <i class="fas fa-comments chat-open"></i>
+    <i class="fas fa-times chat-close"></i>
+    <span class="chat-badge" id="chatBadge">1</span>
+  </button>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+'use strict';
+
+// ── TRANSLATIONS ──────────────────────────────────────
+const T = {
+  it: {
+    'nav.firm_label': 'Studio Legale',
+    'nav.home_short': 'Home',
+    'nav.practice': 'Aree di Pratica',
+    'nav.practice_short': 'Aree',
+    'nav.about': 'Chi Siamo',
+    'nav.contact': 'Contatti',
+    'hero.eyebrow': 'Studio Legale · Verona · Italia',
+    'hero.line1': 'Per te.',
+    'hero.line2': 'Per l\'innovazione.',
+    'hero.subtitle': 'Il primo studio legale in Italia che fonde competenze giuridiche con solide basi scientifiche in AI, fisica quantistica e nuove tecnologie — per proteggere le frontiere del domani.',
+    'hero.cta1': 'Richiedi una consulenza',
+    'hero.cta2': 'Le nostre aree',
+    'trust.bar1': 'Ordine Avvocati di Verona',
+    'trust.bar2': 'Competenze Scientifiche',
+    'trust.bar3': 'AI · Spazio · Energia',
+    'trust.bar4': 'Startup & Corporate',
+    'practice.eyebrow': 'Specializzazioni',
+    'practice.title': 'Le nostre aree di pratica',
+    'practice.subtitle': 'Assistiamo società e startup che operano nelle frontiere tecnologiche, con una consulenza che comprende davvero la scienza dietro ogni progetto.',
+    'pa.ai.title': 'Intelligenza Artificiale',
+    'pa.ai.desc': 'Compliance EU AI Act, governance algoritmica, responsabilità dei sistemi AI, contratti per sviluppo e deploy di modelli ML e Deep Learning.',
+    'pa.space.title': 'Diritto dello Spazio',
+    'pa.space.desc': 'Contratti satellitari, space debris, frequency allocation, space tourism, normativa internazionale sulla commercializzazione dello spazio.',
+    'pa.energy.title': 'Energia del Futuro',
+    'pa.energy.desc': 'Energie rinnovabili, fusione nucleare, regolamentazione energetica, contratti per infrastrutture e progetti di ricerca nel settore energetico.',
+    'pa.research.title': 'Ricerca Scientifica',
+    'pa.research.desc': 'Brevetti, proprietà intellettuale, contratti R&D, trasferimento tecnologico università-impresa, protezione delle invenzioni deep tech.',
+    'pa.tech.title': 'Nuove Tecnologie',
+    'pa.tech.desc': 'Quantum computing, blockchain, cybersecurity, data protection GDPR, contratti tecnologici, governance dei dati per imprese innovative.',
+    'about.eyebrow': 'Chi siamo',
+    'about.photo_label': 'Avv. Francesco Lizzani',
+    'about.role': 'Avvocato · Diritto & Innovazione Tecnologica',
+    'about.text1': 'Lo Studio Legale Lizzani si distingue per un approccio unico nel panorama legale italiano: la <strong>fusione tra competenze giuridiche e una solida formazione scientifica</strong>, coltivata nel tempo con studio e pratica.',
+    'about.text2': 'Questa combinazione ci permette di assistere <strong>società e startup d\'avanguardia</strong> non solo sul piano normativo, ma con una comprensione profonda della tecnologia al cuore di ogni progetto. Non traduciamo la scienza in diritto — la viviamo.',
+    'about.cta': 'Parla con noi',
+    'contact.eyebrow': 'Contatti',
+    'contact.title': 'Siamo qui per te',
+    'contact.subtitle': 'Hai un progetto innovativo e hai bisogno di assistenza legale specializzata? Contattaci per un primo colloquio.',
+    'contact.address_label': 'Studio',
+    'contact.phone_label': 'Telefono',
+    'contact.form_title': 'Invia un messaggio',
+    'form.name': 'Nome e Cognome',
+    'form.area': 'Area di interesse',
+    'form.area_default': 'Seleziona un\'area',
+    'form.message': 'Messaggio',
+    'form.submit': 'Invia richiesta',
+    'form.success': '✓ Messaggio inviato!',
+    'nav.home': 'Home',
+    'chat.name': 'Studio Lizzani',
+    'chat.status': 'Online',
+    'chat.placeholder': 'Scrivi un messaggio...',
+    'chat.welcome': 'Benvenuto nello Studio Legale Lizzani 👋\n\nSono qui per fornirti informazioni preliminari sulle nostre specializzazioni. Come posso aiutarti?',
+    'qr.studio': '📋 Lo Studio',
+    'qr.ai': '🤖 AI & Machine Learning',
+    'qr.space': '🚀 Diritto dello Spazio',
+    'qr.energy': '⚡ Energia',
+    'qr.research': '🔬 Ricerca & Brevetti',
+    'qr.contact': '📞 Contatti',
+  },
+  en: {
+    'nav.firm_label': 'Law Firm',
+    'nav.home_short': 'Home',
+    'nav.practice': 'Practice Areas',
+    'nav.practice_short': 'Areas',
+    'nav.about': 'About Us',
+    'nav.contact': 'Contact',
+    'hero.eyebrow': 'Law Firm · Verona, Italy',
+    'hero.line1': 'For you.',
+    'hero.line2': 'For innovation.',
+    'hero.subtitle': 'The first Italian law firm merging legal expertise with deep scientific knowledge in AI, quantum physics, and emerging technologies — to protect tomorrow\'s frontiers.',
+    'hero.cta1': 'Request a consultation',
+    'hero.cta2': 'Our practice areas',
+    'trust.bar1': 'Verona Bar Association',
+    'trust.bar2': 'Scientific Expertise',
+    'trust.bar3': 'AI · Space · Energy',
+    'trust.bar4': 'Startups & Corporate',
+    'practice.eyebrow': 'Specializations',
+    'practice.title': 'Our Practice Areas',
+    'practice.subtitle': 'We assist companies and startups operating at the technological frontier, with advice that truly understands the science behind every project.',
+    'pa.ai.title': 'Artificial Intelligence',
+    'pa.ai.desc': 'EU AI Act compliance, algorithmic governance, AI system liability, contracts for development and deployment of ML and Deep Learning models.',
+    'pa.space.title': 'Space Law',
+    'pa.space.desc': 'Satellite contracts, space debris liability, frequency allocation, space tourism, international regulations on the commercialization of space.',
+    'pa.energy.title': 'Future Energy',
+    'pa.energy.desc': 'Renewable energy, nuclear fusion, energy regulation, infrastructure contracts and research projects in the energy sector.',
+    'pa.research.title': 'Scientific Research',
+    'pa.research.desc': 'Patents, intellectual property, R&D contracts, university-industry technology transfer, deep tech invention protection.',
+    'pa.tech.title': 'New Technologies',
+    'pa.tech.desc': 'Quantum computing, blockchain, cybersecurity, GDPR data protection, technology contracts, data governance for innovative companies.',
+    'about.eyebrow': 'About Us',
+    'about.photo_label': 'Avv. Francesco Lizzani',
+    'about.role': 'Attorney · Law & Technology Innovation',
+    'about.text1': 'Studio Legale Lizzani stands out for a unique approach in the Italian legal landscape: the <strong>fusion of legal expertise with a solid scientific background</strong>, cultivated through dedicated study and practice.',
+    'about.text2': 'This combination allows us to support <strong>cutting-edge companies and startups</strong> not just on the regulatory side, but with a deep understanding of the technology at the heart of every project. We don\'t translate science into law — we live it.',
+    'about.cta': 'Talk to us',
+    'contact.eyebrow': 'Contact',
+    'contact.title': 'We are here for you',
+    'contact.subtitle': 'Do you have an innovative project and need specialized legal assistance? Contact us for an initial consultation.',
+    'contact.address_label': 'Office',
+    'contact.phone_label': 'Phone',
+    'contact.form_title': 'Send a message',
+    'form.name': 'Full Name',
+    'form.area': 'Area of interest',
+    'form.area_default': 'Select an area',
+    'form.message': 'Message',
+    'form.submit': 'Send request',
+    'form.success': '✓ Message sent!',
+    'nav.home': 'Home',
+    'chat.name': 'Studio Lizzani',
+    'chat.status': 'Online',
+    'chat.placeholder': 'Type a message...',
+    'chat.welcome': 'Welcome to Studio Legale Lizzani 👋\n\nI\'m here to provide preliminary information about our specializations. How can I help you?',
+    'qr.studio': '📋 The Firm',
+    'qr.ai': '🤖 AI & Machine Learning',
+    'qr.space': '🚀 Space Law',
+    'qr.energy': '⚡ Energy',
+    'qr.research': '🔬 Research & Patents',
+    'qr.contact': '📞 Contact',
+  }
+};
+
+// ── CHATBOT KNOWLEDGE BASE ────────────────────────────
+const KB = {
+  it: {
+    studio: 'Lo Studio Legale Lizzani si distingue nel panorama italiano per la sua caratteristica unica: affiancare alla tradizionale expertise giuridica una <strong>profonda formazione scientifica</strong>. L\'avv. Francesco Lizzani ha sviluppato competenze in algebra lineare, fisica classica e quantistica, AI, machine learning e deep learning.\n\nQuesto consente allo studio di comprendere davvero le tecnologie dei clienti — non solo di tutelarle legalmente.',
+    ai: 'Nel campo dell\'<strong>Intelligenza Artificiale</strong>, lo studio offre:\n\n✦ Compliance EU AI Act e audit dei sistemi\n✦ Governance algoritmica e responsabilità AI\n✦ Contratti per sviluppo e licensing di modelli ML/DL\n✦ Data governance e protezione dei dati di training\n✦ IP sulle creazioni generate da AI\n✦ Consulenza per startup AI nel percorso regolatorio\n\nLa comprensione tecnica del machine learning e del deep learning ci permette di essere veramente utili in questi contesti — non solo come consulenti legali.',
+    spazio: 'Il <strong>diritto dello spazio</strong> è una delle specializzazioni più innovative dello studio. Offriamo consulenza su:\n\n✦ Contratti per operatori satellitari e launch providers\n✦ Frequenze radio e orbital slots (ITU)\n✦ Space debris liability e assicurazioni\n✦ Legislazione space tourism\n✦ Space resources e diritti di estrazione\n✦ Trattati internazionali e regolazione nazionale\n\nIl settore spaziale commerciale è in rapida espansione: serve un avvocato che capisca sia la tecnologia che il quadro normativo.',
+    energia: 'Nel settore <strong>energetico</strong>, lo studio assiste:\n\n✦ Progetti di energia rinnovabile (solare, eolico, idroelettrico)\n✦ Ricerca sulla fusione nucleare (ITER e startup private)\n✦ Smart grid e infrastrutture energetiche\n✦ Power Purchase Agreement (PPA)\n✦ Regulatory compliance e autorizzazioni\n✦ Startup deep tech nel settore clean energy',
+    ricerca: 'Per la <strong>ricerca scientifica</strong> e il trasferimento tecnologico, lo studio offre:\n\n✦ Brevettazione di invenzioni tecnologiche e scientifiche\n✦ Contratti R&D e collaborazioni università-impresa\n✦ Protezione del know-how scientifico e segreti industriali\n✦ Licensing di tecnologie e spin-off universitari\n✦ Finanziamenti europei (Horizon Europe)\n✦ IP per progetti di ricerca internazionali',
+    quantum: 'Il <strong>quantum computing</strong> è una delle frontiere che lo studio segue con particolare attenzione. L\'avv. Lizzani coltiva competenze in meccanica quantistica e algebra lineare, base essenziale per comprendere questa tecnologia.\n\nOffriamo consulenza su:\n✦ IP e brevetti nel settore quantum\n✦ Contratti per collaborazioni in quantum research\n✦ Post-quantum cryptography: impatti normativi\n✦ Startup quantum hardware e software',
+    tecnologia: 'Nel campo delle <strong>nuove tecnologie</strong>, lo studio copre:\n\n✦ Blockchain e smart contracts\n✦ Cybersecurity e responsabilità degli operatori\n✦ GDPR e data protection avanzata\n✦ Contratti SaaS, cloud e piattaforme digitali\n✦ Quantum computing e crittografia post-quantum\n✦ IoT, connected devices e responsabilità del prodotto',
+    startup: 'Lo studio è particolarmente attrezzato per accompagnare <strong>startup e scaleup tecnologiche</strong>:\n\n✦ Strutturazione societaria (SRL, startup innovativa)\n✦ Contratti con investitori (term sheet, SAFE, convertibili)\n✦ Protezione IP del prodotto tecnologico\n✦ Compliance regolatoria settoriale (AI Act, GDPR...)\n✦ Contratti commerciali e partnership strategiche\n✦ Internazionalizzazione e accesso a mercati esteri',
+    contatto: '📍 <strong>Studio:</strong> Via Milone n. 6, Verona\n📞 <strong>Tel:</strong> +39 347 645 7593\n✉️ <strong>Email:</strong> avvfrancescolizzani@studiolegalelizzani.com\n🔒 <strong>PEC:</strong> francescolizzani@ordineavvocativrpec.it\n💼 <strong>LinkedIn:</strong> Francesco Lizzani\n\nSiamo disponibili per un primo colloquio conoscitivo senza impegno.',
+    default: 'Grazie per la tua domanda. Lo Studio Legale Lizzani si specializza in:\n\n🤖 Intelligenza Artificiale & ML\n🚀 Diritto dello Spazio\n⚡ Energia del Futuro\n🔬 Ricerca Scientifica\n💻 Nuove Tecnologie\n\nCon la caratteristica unica di combinare competenze legali e scientifiche approfondite. Puoi approfondire una specifica area o contattarci per una consulenza preliminare!'
+  },
+  en: {
+    studio: 'Studio Legale Lizzani stands out in the Italian legal landscape for its unique characteristic: combining traditional legal expertise with <strong>deep scientific knowledge</strong>. Avv. Francesco Lizzani has developed competencies in linear algebra, classical and quantum physics, AI, machine learning, and deep learning.\n\nThis allows the firm to truly understand clients\' technologies — not just to protect them legally.',
+    ai: 'In the field of <strong>Artificial Intelligence</strong>, the firm offers:\n\n✦ EU AI Act compliance and system audits\n✦ Algorithmic governance and AI liability\n✦ Contracts for ML/DL model development and licensing\n✦ Data governance and training data protection\n✦ IP for AI-generated creations\n✦ Advisory for AI startups on regulatory pathways\n\nOur technical understanding of machine learning and deep learning allows us to be truly useful in these contexts.',
+    space: 'Space law is one of the firm\'s most innovative specializations. We offer advice on:\n\n✦ Contracts for satellite operators and launch providers\n✦ Radio frequencies and orbital slots (ITU)\n✦ Space debris liability and insurance\n✦ Space tourism legislation\n✦ Space resource rights and extraction\n✦ International treaties and national regulation\n\nCommercial space is growing fast — you need a lawyer who understands both the technology and the regulatory framework.',
+    energy: 'In the <strong>energy sector</strong>, the firm assists:\n\n✦ Renewable energy projects (solar, wind, hydro)\n✦ Nuclear fusion research (ITER and private startups)\n✦ Smart grids and energy infrastructure\n✦ Power Purchase Agreements (PPAs)\n✦ Regulatory compliance and permits\n✦ Clean energy deep tech startups',
+    research: 'For <strong>scientific research</strong> and technology transfer, the firm offers:\n\n✦ Patenting of technological and scientific inventions\n✦ R&D contracts and university-industry collaboration\n✦ Scientific know-how and trade secret protection\n✦ Technology licensing and university spin-offs\n✦ European funding (Horizon Europe)\n✦ IP protection for international research projects',
+    quantum: 'Quantum computing is one of the frontiers we follow with particular attention. Avv. Lizzani cultivates expertise in quantum mechanics and linear algebra — essential foundations for understanding this technology.\n\nWe offer advice on:\n✦ IP and patents in the quantum sector\n✦ Contracts for quantum research collaborations\n✦ Post-quantum cryptography: regulatory impacts\n✦ Quantum hardware and software startups',
+    technology: 'In the field of <strong>new technologies</strong>, the firm covers:\n\n✦ Blockchain and smart contracts\n✦ Cybersecurity and operator liability\n✦ GDPR and advanced data protection\n✦ SaaS, cloud and digital platform contracts\n✦ Quantum computing and post-quantum cryptography\n✦ IoT, connected devices and product liability',
+    startup: 'The firm is particularly well-equipped to support <strong>tech startups and scaleups</strong>:\n\n✦ Corporate structuring (innovative startup status in Italy)\n✦ Investor contracts (term sheets, SAFEs, convertibles)\n✦ Tech product IP protection\n✦ Sector regulatory compliance (AI Act, GDPR...)\n✦ Commercial contracts and strategic partnerships\n✦ Internationalization and market access',
+    contact: '📍 <strong>Office:</strong> Via Milone 6, Verona, Italy\n📞 <strong>Tel:</strong> +39 347 645 7593\n✉️ <strong>Email:</strong> avvfrancescolizzani@studiolegalelizzani.com\n🔒 <strong>PEC:</strong> francescolizzani@ordineavvocativrpec.it\n💼 <strong>LinkedIn:</strong> Francesco Lizzani\n\nWe are available for an initial no-commitment consultation.',
+    default: 'Thank you for your question. Studio Legale Lizzani specializes in:\n\n🤖 Artificial Intelligence & ML\n🚀 Space Law\n⚡ Future Energy\n🔬 Scientific Research\n💻 New Technologies\n\nWith the unique quality of combining deep legal and scientific expertise. You can explore a specific area or contact us for a preliminary consultation!'
+  }
+};
+
+// ── KEYWORD MAP ───────────────────────────────────────
+const KW = {
+  it: [
+    { keys: ['chi sei','chi siete','studio legale','di cosa','cosa fate','presentati','presentazione'], r: 'studio' },
+    { keys: ['ai','intelligenza artificiale','machine learning','deep learning','modello','algoritm','llm','gpt','neural','rete neurale','eu ai act','compliance ai'], r: 'ai' },
+    { keys: ['spazio','satellite','satelliti','launch','razzo','debris','orbital','frequenz','space tourism','commercializzazione dello spazio'], r: 'spazio' },
+    { keys: ['energia','rinnovab','solare','eolico','fusione nucleare','nucleare','ppa','smart grid','clean energy','idroelettric'], r: 'energia' },
+    { keys: ['ricerca','brevett','ip','proprietà intellettuale','r&d','università','spin-off','horizon','know-how','trasferimento tecnologico'], r: 'ricerca' },
+    { keys: ['quantum','qubit','meccanica quantistica','post-quantum','crittografia'], r: 'quantum' },
+    { keys: ['blockchain','cybersecurity','gdpr','dati','saas','cloud','iot','nuove tecnologie'], r: 'tecnologia' },
+    { keys: ['startup','scaleup','investitor','term sheet','safe','convertibile','societar'], r: 'startup' },
+    { keys: ['contatto','contattare','dove siete','indirizzo','telefono','email','pec','linkedin'], r: 'contatto' },
+  ],
+  en: [
+    { keys: ['who are you','about the firm','what do you do','introduce','presentation','law firm'], r: 'studio' },
+    { keys: ['ai','artificial intelligence','machine learning','deep learning','model','algorithm','llm','neural network','eu ai act','compliance'], r: 'ai' },
+    { keys: ['space','satellite','launch','debris','orbital','frequency','space tourism','commercialization of space'], r: 'space' },
+    { keys: ['energy','renewable','solar','wind','nuclear fusion','fusion','ppa','smart grid','clean energy'], r: 'energy' },
+    { keys: ['research','patent','ip','intellectual property','r&d','university','spin-off','horizon','know-how','technology transfer'], r: 'research' },
+    { keys: ['quantum','qubit','quantum mechanics','post-quantum','cryptography'], r: 'quantum' },
+    { keys: ['blockchain','cybersecurity','gdpr','data','saas','cloud','iot','new technologies'], r: 'technology' },
+    { keys: ['startup','scaleup','investor','term sheet','safe','convertible'], r: 'startup' },
+    { keys: ['contact','where','address','phone','email','pec','linkedin','reach'], r: 'contact' },
+  ]
+};
+
+// ── STATE ─────────────────────────────────────────────
+let lang = 'it';
+let chatReady = false;
+let chatIsOpen = false;
+
+// ── LANGUAGE ──────────────────────────────────────────
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = T[l][el.dataset.i18n];
+    if (v !== undefined) el.innerHTML = v;
+  });
+
+  document.querySelectorAll('[data-ph-it]').forEach(el => {
+    el.placeholder = el.getAttribute('data-ph-' + l) || '';
+  });
+
+  document.getElementById('btnIT').classList.toggle('active', l === 'it');
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+
+  document.getElementById('footerCopy').textContent =
+    '© ' + new Date().getFullYear() + ' Studio Legale Lizzani · Verona';
+
+  if (chatReady) {
+    document.getElementById('chatInput').placeholder = T[l]['chat.placeholder'];
+    document.querySelector('.chat-hname').textContent = T[l]['chat.name'];
+    document.querySelector('.chat-hstatus').textContent = T[l]['chat.status'];
+    renderQuickReplies();
+  }
+}
+
+// ── MOBILE NAV ────────────────────────────────────────
+function toggleMobileNav() {
+  document.getElementById('navRight').classList.toggle('mobile-open');
+}
+
+document.querySelectorAll('.nav-links a').forEach(a =>
+  a.addEventListener('click', () =>
+    document.getElementById('navRight').classList.remove('mobile-open'))
+);
+
+// ── NAV SCROLL EFFECT ─────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── SCROLL ANIMATIONS ─────────────────────────────────
+const scrollObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => scrollObs.observe(el));
+
+// ── FORM ──────────────────────────────────────────────
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = T[lang]['form.success'];
+  btn.style.background = '#2E7D32';
+  btn.style.borderColor = '#2E7D32';
+  setTimeout(() => {
+    btn.textContent = T[lang]['form.submit'];
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    e.target.reset();
+  }, 3500);
+}
+
+// ── CHAT LOGIC ────────────────────────────────────────
+function toggleChat() {
+  chatIsOpen = !chatIsOpen;
+  document.getElementById('chatWindow').classList.toggle('open', chatIsOpen);
+  document.getElementById('chatToggle').classList.toggle('open', chatIsOpen);
+  document.getElementById('chatBadge').classList.add('hidden');
+
+  if (!chatReady) {
+    chatReady = true;
+    setTimeout(() => {
+      addBotMsg(T[lang]['chat.welcome']);
+      setTimeout(renderQuickReplies, 600);
+    }, 300);
+  }
+}
+
+function renderQuickReplies() {
+  const c = document.getElementById('quickReplies');
+  c.innerHTML = '';
+  const keys = ['qr.studio','qr.ai','qr.space','qr.energy','qr.research','qr.contact'];
+  const qrMap = {
+    'qr.studio': 'studio',
+    'qr.ai': 'ai',
+    'qr.space': lang === 'it' ? 'spazio' : 'space',
+    'qr.energy': lang === 'it' ? 'energia' : 'energy',
+    'qr.research': lang === 'it' ? 'ricerca' : 'research',
+    'qr.contact': lang === 'it' ? 'contatto' : 'contact'
+  };
+  keys.forEach(k => {
+    const b = document.createElement('button');
+    b.className = 'quick-reply-btn';
+    b.textContent = T[lang][k];
+    b.onclick = () => {
+      addUserMsg(T[lang][k]);
+      c.innerHTML = '';
+      respond(KB[lang][qrMap[k]]);
+    };
+    c.appendChild(b);
+  });
+}
+
+function sendChatMessage() {
+  const inp = document.getElementById('chatInput');
+  const txt = inp.value.trim();
+  if (!txt) return;
+  inp.value = '';
+  addUserMsg(txt);
+  document.getElementById('quickReplies').innerHTML = '';
+  respond(getResponse(txt));
+}
+
+function handleChatKey(e) { if (e.key === 'Enter') sendChatMessage(); }
+
+function getResponse(txt) {
+  const lo = txt.toLowerCase();
+  const rules = KW[lang];
+  for (const rule of rules) {
+    if (rule.keys.some(k => lo.includes(k))) return KB[lang][rule.r];
+  }
+  return KB[lang].default;
+}
+
+function addUserMsg(txt) {
+  const el = document.createElement('div');
+  el.className = 'chat-message user';
+  el.textContent = txt;
+  document.getElementById('chatMessages').appendChild(el);
+  scrollChat();
+}
+
+function addBotMsg(txt) {
+  const el = document.createElement('div');
+  el.className = 'chat-message bot';
+  el.innerHTML = txt.replace(/\n/g, '<br>');
+  document.getElementById('chatMessages').appendChild(el);
+  scrollChat();
+}
+
+function respond(text) {
+  const msgs = document.getElementById('chatMessages');
+  const t = document.createElement('div');
+  t.className = 'typing-indicator';
+  t.innerHTML = '<span></span><span></span><span></span>';
+  msgs.appendChild(t);
+  scrollChat();
+  setTimeout(() => {
+    t.remove();
+    addBotMsg(text);
+  }, 900 + Math.random() * 600);
+}
+
+function scrollChat() {
+  const m = document.getElementById('chatMessages');
+  m.scrollTop = m.scrollHeight;
+}
+
+// ── INIT ──────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => setLang('it'));
+</script>
+</body>
+</html>
