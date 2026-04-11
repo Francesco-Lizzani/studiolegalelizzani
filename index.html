@@ -1721,7 +1721,7 @@ let ARTICLES = [];
 
 async function loadArticles() {
   try {
-    const res = await fetch('articles.json?t=' + Date.now());
+    const res = await fetch('https://script.google.com/a/macros/studiolegalelizzani.com/s/AKfycbxRNYoaD2qlKxlCwkXdDPxDaLkMPs68ItVPAld-8l2Asd-SSiPk_cJM5zSS3qRvKkhJGQ/exec?t=' + Date.now());
     ARTICLES = await res.json();
   } catch(e) {
     ARTICLES = [];
