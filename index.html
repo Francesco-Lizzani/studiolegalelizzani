@@ -1573,7 +1573,7 @@ function setLang(l) {
   document.getElementById('footerCopy').textContent =
     '© ' + new Date().getFullYear() + ' Studio Legale Lizzani · Verona';
 
-  renderArticles();
+  if (ARTICLES.length > 0) renderArticles();
 
   if (chatReady) {
     document.getElementById('chatInput').placeholder = T[l]['chat.placeholder'];
@@ -1716,25 +1716,18 @@ function scrollChat() {
   m.scrollTop = m.scrollHeight;
 }
 
-// ── ARTICLES DATA ─────────────────────────────────────
-// Per aggiungere un nuovo articolo: copia un blocco { ... } e incollalo
-// IN CIMA all'array (primo = più recente). Poi ricarica il file su GitHub.
-// Per l'immagine: salva il file jpg/png nella stessa cartella di index.html
-// su GitHub e inserisci il nome file nel campo "image" (es: 'orbital-cloud.jpg').
-const ARTICLES = [
-  {
-    tag_it: 'Space Tech · AI Infrastructure',
-    tag_en: 'Space Tech · AI Infrastructure',
-    date: 'Gennaio 2026',
-    date_en: 'January 2026',
-    title_it: 'Why the "Orbital Cloud" is the next $1T infrastructure play',
-    title_en: 'Why the "Orbital Cloud" is the next $1T infrastructure play',
-    excerpt_it: 'La corsa agli armamenti dell\'AI ha raggiunto un limite terrestre. Data center orbitali in LEO offrono energia solare 24/7 a $0.01/kWh, costi di lancio sub-$100/kg con veicoli Starship-class, e un vantaggio competitivo unico: il "Sovereign Compute" al di fuori delle giurisdizioni terrestri.',
-    excerpt_en: 'The AI arms race has hit a terrestrial ceiling. Orbital data centers in LEO offer 24/7 solar energy at $0.01/kWh, sub-$100/kg launch costs with Starship-class vehicles, and a unique competitive moat: "Sovereign Compute" outside traditional terrestrial jurisdictions.',
-    url: 'https://www.linkedin.com/posts/francesco-lizzani-73433a231_venturecapital-spacetech-aiinfrastructure-activity-7411519479051972608-mT7W',
-    image: 'orbital-cloud.jpg.png'  // ← carica questo file su GitHub
+// ── ARTICLES — caricati da articles.json ──────────────
+let ARTICLES = [];
+
+async function loadArticles() {
+  try {
+    const res = await fetch('articles.json?t=' + Date.now());
+    ARTICLES = await res.json();
+  } catch(e) {
+    ARTICLES = [];
   }
-];
+  renderArticles();
+}
 
 function renderArticles() {
   const grid = document.getElementById('articlesGrid');
@@ -1764,7 +1757,7 @@ function renderArticles() {
 }
 
 // ── INIT ──────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => { setLang('it'); renderArticles(); });
+document.addEventListener('DOMContentLoaded', () => { setLang('it'); loadArticles(); });
 </script>
 </body>
 </html>
