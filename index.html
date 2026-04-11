@@ -925,24 +925,63 @@
     /* ===== PUBLICATIONS ===== */
     .articles-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
     }
 
     .article-card {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
-      border-top: 3px solid var(--red);
-      padding: 1.8rem;
       transition: all 0.3s;
       text-decoration: none;
       display: block;
+      overflow: hidden;
     }
 
     .article-card:hover {
-      background: rgba(255,255,255,0.08);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.4);
+    }
+
+    .article-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0d0d1d 100%);
+    }
+
+    .article-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .article-card:hover .article-image img { transform: scale(1.04); }
+
+    .article-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .article-image-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--red);
+    }
+
+    .article-body {
+      padding: 1.6rem;
     }
 
     .article-meta {
@@ -970,19 +1009,19 @@
 
     .article-title {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--white);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.8rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.9rem;
       line-height: 1.3;
     }
 
     .article-excerpt {
       font-size: 0.87rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      margin-bottom: 1.3rem;
     }
 
     .article-read-more {
@@ -1679,57 +1718,48 @@ function scrollChat() {
 
 // ── ARTICLES DATA ─────────────────────────────────────
 // Per aggiungere un nuovo articolo: copia un blocco { ... } e incollalo
-// in cima all'array, cambia titolo, tag, data, excerpt e url.
+// IN CIMA all'array (primo = più recente). Poi ricarica il file su GitHub.
+// Per l'immagine: salva il file jpg/png nella stessa cartella di index.html
+// su GitHub e inserisci il nome file nel campo "image" (es: 'orbital-cloud.jpg').
 const ARTICLES = [
   {
-    tag_it: 'Intelligenza Artificiale',
-    tag_en: 'Artificial Intelligence',
-    date: '7 Aprile 2026',
-    date_en: 'April 7, 2026',
-    title_it: 'EU AI Act: Cosa Devono Sapere le Startup nel 2026',
-    title_en: 'EU AI Act: What Startups Need to Know in 2026',
-    excerpt_it: 'Il regolamento europeo sull\'intelligenza artificiale è pienamente applicabile. Ecco le principali obbligazioni per chi sviluppa sistemi AI ad alto rischio e come strutturarsi per la compliance.',
-    excerpt_en: 'The EU AI Act is now fully applicable. Here are the key obligations for high-risk AI system developers and how to structure compliance.',
-    url: 'https://www.linkedin.com/in/francescolizzani'
-  },
-  {
-    tag_it: 'Diritto dello Spazio',
-    tag_en: 'Space Law',
-    date: '31 Marzo 2026',
-    date_en: 'March 31, 2026',
-    title_it: 'Space Debris e Responsabilità: Il Vuoto Normativo che Preoccupa gli Operatori',
-    title_en: 'Space Debris and Liability: The Regulatory Gap That Worries Operators',
-    excerpt_it: 'Con oltre 27.000 oggetti tracciati in orbita, la questione della responsabilità per i detriti spaziali diventa sempre più urgente. Analizziamo il quadro normativo internazionale.',
-    excerpt_en: 'With over 27,000 tracked objects in orbit, liability for space debris is increasingly urgent. We analyze the international regulatory framework.',
-    url: 'https://www.linkedin.com/in/francescolizzani'
-  },
-  {
-    tag_it: 'Quantum Computing',
-    tag_en: 'Quantum Computing',
-    date: '24 Marzo 2026',
-    date_en: 'March 24, 2026',
-    title_it: 'Post-Quantum Cryptography: Perché il Diritto Deve Prepararsi Adesso',
-    title_en: 'Post-Quantum Cryptography: Why Law Must Prepare Now',
-    excerpt_it: 'I computer quantistici minacciano gli attuali sistemi crittografici. Le implicazioni legali per contratti digitali, firme elettroniche e protezione dei dati sono enormi.',
-    excerpt_en: 'Quantum computers threaten current cryptographic systems. The legal implications for digital contracts, electronic signatures, and data protection are enormous.',
-    url: 'https://www.linkedin.com/in/francescolizzani'
+    tag_it: 'Space Tech · AI Infrastructure',
+    tag_en: 'Space Tech · AI Infrastructure',
+    date: 'Gennaio 2026',
+    date_en: 'January 2026',
+    title_it: 'Why the "Orbital Cloud" is the next $1T infrastructure play',
+    title_en: 'Why the "Orbital Cloud" is the next $1T infrastructure play',
+    excerpt_it: 'La corsa agli armamenti dell\'AI ha raggiunto un limite terrestre. Data center orbitali in LEO offrono energia solare 24/7 a $0.01/kWh, costi di lancio sub-$100/kg con veicoli Starship-class, e un vantaggio competitivo unico: il "Sovereign Compute" al di fuori delle giurisdizioni terrestri.',
+    excerpt_en: 'The AI arms race has hit a terrestrial ceiling. Orbital data centers in LEO offer 24/7 solar energy at $0.01/kWh, sub-$100/kg launch costs with Starship-class vehicles, and a unique competitive moat: "Sovereign Compute" outside traditional terrestrial jurisdictions.',
+    url: 'https://www.linkedin.com/posts/francesco-lizzani-73433a231_venturecapital-spacetech-aiinfrastructure-activity-7411519479051972608-mT7W',
+    image: 'orbital-cloud.jpg'  // ← carica questo file su GitHub
   }
 ];
 
 function renderArticles() {
   const grid = document.getElementById('articlesGrid');
   if (!grid) return;
-  grid.innerHTML = ARTICLES.map(a => `
+  grid.innerHTML = ARTICLES.map(a => {
+    const imgHtml = a.image
+      ? `<img src="${a.image}" alt="${lang === 'it' ? a.title_it : a.title_en}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'article-image-placeholder\\'><i class=\\'fas fa-rocket\\'></i></div><div class=\\'article-image-bar\\'></div>'">`
+      : `<div class="article-image-placeholder"><i class="fas fa-rocket"></i></div>`;
+    return `
     <a class="article-card fade-up" href="${a.url}" target="_blank" rel="noopener">
-      <div class="article-meta">
-        <span class="article-tag">${lang === 'it' ? a.tag_it : a.tag_en}</span>
-        <span class="article-date">${lang === 'it' ? a.date : a.date_en}</span>
+      <div class="article-image">
+        ${imgHtml}
+        <div class="article-image-bar"></div>
       </div>
-      <p class="article-title">${lang === 'it' ? a.title_it : a.title_en}</p>
-      <p class="article-excerpt">${lang === 'it' ? a.excerpt_it : a.excerpt_en}</p>
-      <span class="article-read-more">${T[lang]['pub.read_more']} <i class="fas fa-arrow-right"></i></span>
-    </a>
-  `).join('');
+      <div class="article-body">
+        <div class="article-meta">
+          <span class="article-tag">${lang === 'it' ? a.tag_it : a.tag_en}</span>
+          <span class="article-date">${lang === 'it' ? a.date : a.date_en}</span>
+        </div>
+        <p class="article-title">${lang === 'it' ? a.title_it : a.title_en}</p>
+        <p class="article-excerpt">${lang === 'it' ? a.excerpt_it : a.excerpt_en}</p>
+        <span class="article-read-more">${T[lang]['pub.read_more']} <i class="fas fa-arrow-right"></i></span>
+      </div>
+    </a>`;
+  }).join('');
   grid.querySelectorAll('.fade-up').forEach(el => scrollObs.observe(el));
 }
 
