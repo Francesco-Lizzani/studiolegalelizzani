@@ -1721,7 +1721,7 @@ let ARTICLES = [];
 
 async function loadArticles() {
   try {
-    const res = await fetch('https://script.google.com/a/macros/studiolegalelizzani.com/s/AKfycbxRNYoaD2qlKxlCwkXdDPxDaLkMPs68ItVPAld-8l2Asd-SSiPk_cJM5zSS3qRvKkhJGQ/exec?t=' + Date.now());
+    const res = await fetch('https://script.google.com/macros/s/AKfycbxhM5ijU1LlYLpc8zduuDdWorOY_V6_Q1lMble4HeddEdNSfC2bFkXj1Ni5pJ7CvlHzrg/exec?t=' + Date.now());
     ARTICLES = await res.json();
   } catch(e) {
     ARTICLES = [];
